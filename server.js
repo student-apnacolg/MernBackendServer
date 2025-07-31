@@ -1,6 +1,7 @@
 // Importing express
 const express = require('express')
 const dotenv = require('dotenv')
+const cors = require('cors')
 const mongoose = require('mongoose')
 const taskRoutes = require('./routes/tasks')
 dotenv.config();
@@ -8,6 +9,12 @@ dotenv.config();
 // Express App
 const app = express()
 const PORT = process.env.PORT || 4000;
+
+app.use(cors({
+  origin: 'https://mern-frontend-eight-kappa.vercel.app/',     // or your React app's URL
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  credentials: true                    // if you use cookies or auth headers
+}));
 
 // // Middleware
 app.use(express.json())
